@@ -137,7 +137,7 @@ def parameterMMSP2Mirror(wave):
     mm45[:,3] = -mm45[:,3]
     mm45_flat = mm45.reshape(-1)
 
-    return mm45_flat, pos #/mm45_flat[0], pos
+    return mm45_flat/mm45_flat[0], pos
 
 def lmfitHSPCalibration(quv, hd, par, imgrot, azimuth, matImageRotatorSeries, isSigma):
 
@@ -612,7 +612,7 @@ def angleSeriesToImageRotatorMuellerMatrixSeries(angleSeries_rad, pos_wl):
 
         saveFile = readsav(pwd+filenameList[pos_angle])
         mm_ir = saveFile["mm"][pos_wl,:,:]
-        mm_ir = mm_ir #/ mm_ir[0,0]
+        mm_ir = mm_ir / mm_ir[0,0]
 
         matSeries[i,:,:] = MuellerMatrixRotation(dangle_rad) @ mm_ir @ MuellerMatrixRotation(-dangle_rad) @ MuellerMatrixRotation((88.2 - 358.2)*dtor)
 
